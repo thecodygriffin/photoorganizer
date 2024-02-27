@@ -47,7 +47,7 @@ for image in "${images[@]}"; do
 
   # Copy images to backup directory
   validate_subdirectory "${image_path}" "Backup"
-  cp "${image_path}/${image_full}" "${image_path}/Backup/${image_full}"
+  cp -p "${image_path}/${image_full}" "${image_path}/Backup/${image_full}"
   
   # Call function to rename the image
   rename_image
