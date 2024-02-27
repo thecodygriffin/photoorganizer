@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 DIR="${1}"
 
 # Ensures a directory exists
@@ -41,7 +41,7 @@ for image in "${images[@]}"; do
   image_full=$(basename "${image}")
   image_name="${image_full%.*}"
   image_extension="${image_full##*.}"
-  image_datetime="$(stat -c %y "${image}"| cut -b 1-30 | \
+  image_datetime="$(stat -c %y "${image}"| cut -b 1-20 | \
     tr -d [:punct:] | tr -d [:space:])"
   image_year=${image_datetime:0:4}
 
