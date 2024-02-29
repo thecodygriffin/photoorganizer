@@ -3,7 +3,7 @@
 set -x
 
 ORGANIZE="${1}"
-LOGS_DIR="/mnt/Storage/Logs/photoorganizer/${2}"
+LOGS_DIR="${2}"
 LOG_FILE="${LOGS_DIR}/$(date +%Y%m%d%H%M%S).txt"
 DIR="${3}"
 
@@ -45,7 +45,7 @@ function create_directory() {
 
 # Determine new file name and rename the image files accordingly
 function rename_image() {
-  image_datetime=$(exiftool -T -CreateDate "${image_path}" | tr -d [:punct:] | tr -d [:space:])
+  image_datetime=$(exiftool -T -CreateDate "${image_path}" | tr -d "[:punct:]" | tr -d "[:space:]")
   if [[ -z "${image_datetime}" ]]; then
     image_increment=$(( ${image_increment} + 1 ))
     image_number=$(( 19700101000000 + ${image_increment} ))  # TODO: Come up with a better solution
@@ -93,7 +93,7 @@ for image in "${images[@]}"; do
 
   # Identify and remove duplicate image files while continuing to process remaining files
   image_id_regex="\<${image_id[0]}\>"
-  if [[ ${unique_image_ids[@]} =~ ${image_id_regex} ]]; then
+  if [[ ${unique_image_ids[*]} =~ ${image_id_regex} ]]; then
     duplicate_image_ids+=( "${image_id[0]}" )
     # Duplicate image files are deleted
     rm "${image_path}"
