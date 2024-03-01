@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 ORGANIZE="${1}"
 LOGS_DIR="${2}"
 LOG_FILE="${LOGS_DIR}/$(date +%Y%m%d%H%M%S).txt"
